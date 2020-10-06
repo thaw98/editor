@@ -334,7 +334,7 @@ public class Editor extends Activity {
     private final static int MD_SYNTAX = 4;
     private final static int SH_SYNTAX = 5;
     private final static int DEF_SYNTAX = 6;
-
+    private TextView wordCounter;
     private File file;
     private String path;
     private Uri content;
@@ -415,6 +415,7 @@ public class Editor extends Activity {
 
         textView = findViewById(R.id.text);
 
+        wordCounter = findViewById(R.id.wordCounter);
         scrollView = findViewById(R.id.vscroll);
 
         if (savedInstanceState != null)
@@ -496,6 +497,8 @@ public class Editor extends Activity {
                         textView.removeCallbacks(updateHighlight);
                         textView.postDelayed(updateHighlight, UPDATE_DELAY);
                     }
+                    int words = calucateWord(s.toString());
+                    wordCounter.setText("Total Words Count: " + words);
 
                 }
 
@@ -731,6 +734,27 @@ public class Editor extends Activity {
         outState.putBoolean(CHANGED, changed);
         outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
+    }
+
+    private int calucateWord(String s) {
+
+        if (s != null) {
+            int count = 0;
+            char ch[] = new char[s.length()];
+            for (int i = 0; i < s.length(); i++) {
+                ch[i] = s.charAt(i);
+                if (((i > 0) && (ch[i] != ' ') && (ch[i - 1] == ' ')) || ((ch[0] != ' ') && (i == 0)))
+                    count++;
+            }
+
+        }
+
+        String trim = s.trim();
+        if (trim.isEmpty())
+            return 0;
+        return trim.split("\\s+").length;
+
+        // ((i > 0) && (ch[i] != ' ') && (ch[i] != '\n'))
     }
 
     // onCreateOptionsMenu

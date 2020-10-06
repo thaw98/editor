@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/vscroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="8dp"
@@ -10,22 +9,37 @@
     android:layout_marginBottom="8dp"
     android:fillViewport="true">
 
-  <HorizontalScrollView
-      android:id="@+id/hscroll"
-      android:layout_width="match_parent"
+  <ScrollView
+      android:id="@+id/vscroll"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:fillViewport="true"
-      tools:ignore="LabelFor">
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
 
     <EditText
         android:id="@+id/text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top"
-        android:inputType="text|textMultiLine"
+        android:inputType="textCapSentences"
         android:typeface="monospace"
         tools:ignore="Autofill" />
 
-  </HorizontalScrollView>
+  </ScrollView>
 
-</ScrollView>
+  <TextView
+      android:id="@+id/wordCounter"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginTop="8dp"
+      android:text="Total Words Count: 0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/vscroll" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
