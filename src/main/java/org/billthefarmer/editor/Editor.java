@@ -884,6 +884,9 @@ public class Editor extends Activity {
             case android.R.id.home:
                 onBackPressed();
                 break;
+            case R.id.voice:
+                OpenVoiceRecorder();
+                break;
 
 
             case R.id.neu:
@@ -966,6 +969,25 @@ public class Editor extends Activity {
             searchItem.collapseActionView();
 
         return true;
+    }
+
+    private void OpenVoiceRecorder() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        startActivityForResult(intent, 100);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && data != null) {
+            ArrayList<String> stringArrayListExtra = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            textView.append(" " + stringArrayListExtra.get(0));
+        } else {
+            Toast.makeText(this, "No Result", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
