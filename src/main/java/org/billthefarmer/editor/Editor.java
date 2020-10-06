@@ -888,6 +888,12 @@ public class Editor extends Activity {
                 OpenVoiceRecorder();
                 break;
 
+            //if click on Share Button
+            case R.id.share:
+                ShareFile();
+                break;
+
+
 
             case R.id.neu:
                 freshFile();
@@ -970,6 +976,17 @@ public class Editor extends Activity {
 
         return true;
     }
+
+    //Share file
+    private void ShareFile() {
+        saveFile();
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        Uri screenshotUri = Uri.fromFile(file);
+        sharingIntent.setType("*/*");
+        sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+        startActivity(Intent.createChooser(sharingIntent, "Share using"));
+    }
+
 
     private void OpenVoiceRecorder() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);

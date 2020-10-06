@@ -11,6 +11,12 @@
       android:icon="@drawable/ic_speech"/>
 
   <item
+      android:id="@+id/share"
+      android:showAsAction="always"
+      android:title="Share"
+      android:icon="@drawable/ic_share"/>
+
+  <item
       android:id="@+id/save"
       android:icon="@drawable/ic_action_save_dark"
       android:showAsAction="always"
